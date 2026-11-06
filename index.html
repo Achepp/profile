@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio - Ahmad Asep Suhendi, S.Kom, M.Kom</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts untuk gaya Brush, Tulisan Tangan, dan Sans-Serif bersih -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Kalam:wght@400;700&family=Patrick+Hand&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#1E1671',      // Biru tua keunguan khas spidol/cat di gambar
+                        inkLight: '#352BA5',
+                        paper: '#F4F2EE',    // Warna dasar kertas
+                        cardPaper: '#F8F7F4',
+                        tape: 'rgba(225, 200, 168, 0.72)'
+                    },
+                    fontFamily: {
+                        brush: ['"Caveat Brush"', 'cursive'],
+                        hand: ['"Patrick Hand"', 'cursive'],
+                        kalam: ['"Kalam"', 'cursive'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Tekstur Kertas Halus */
+        body {
+            background-color: #EFECE6;
+            background-image: 
+                radial-gradient(rgba(30, 22, 113, 0.03) 1px, transparent 0),
+                radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 0);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            overflow-x: hidden;
+        }
+
+        /* Efek Kertas Sobek / Torn Paper Card */
+        .scrapbook-card {
+            background: #F7F6F2;
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.07),
+                0 1px 2px rgba(0, 0, 0, 0.05);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        /* Efek Bergerigi Halus pada Tepian Kertas */
+        .torn-edge-bottom {
+            background-image: linear-gradient(135deg, #F7F6F2 50%, transparent 50%), linear-gradient(225deg, #F7F6F2 50%, transparent 50%);
+            background-position: bottom;
+            background-size: 12px 6px;
+            background-repeat: repeat-x;
+        }
+
+        /* Selotip Kertas (Masking Tape) */
+        .masking-tape {
+            background: linear-gradient(135deg, rgba(226, 198, 163, 0.78), rgba(212, 181, 142, 0.65));
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            backdrop-filter: blur(1px);
+            border-left: 2px dashed rgba(255,255,255,0.45);
+            border-right: 2px dashed rgba(255,255,255,0.45);
+        }
+
+        /* Label Sapuan Kuas Biru (Brush Banner) */
+        .brush-label {
+            background-color: #1E1671;
+            color: #ffffff;
+            position: relative;
+            display: inline-block;
+            padding: 3px 22px 5px 18px;
+            border-radius: 4px 14px 6px 12px;
+            clip-path: polygon(
+                0% 12%, 4% 2%, 96% 0%, 100% 15%, 
+                98% 35%, 100% 60%, 96% 88%, 99% 96%, 
+                4% 100%, 0% 82%, 2% 50%, 0% 28%
+            );
+            box-shadow: 2px 3px 0px rgba(30, 22, 113, 0.18);
+        }
+
+        /* Sapuan Kuas Hitam LECTURER */
+        .brush-black {
+            background-color: #111111;
+            color: #ffffff;
+            position: relative;
+            display: inline-block;
+            padding: 4px 48px 6px 48px;
+            transform: rotate(-1.5deg);
+            clip-path: polygon(
+                2% 10%, 7% 2%, 94% 0%, 99% 18%, 
+                96% 42%, 100% 68%, 93% 92%, 97% 98%, 
+                5% 100%, 0% 85%, 3% 52%, 0% 25%
+            );
+        }
+
+        /* Efek Plastik ID Card */
+        .id-card-holder {
+            background: linear-gradient(145deg, rgba(255,255,255,0.75) 0%, rgba(235,235,240,0.45) 100%);
+            backdrop-filter: blur(6px);
+            border: 2px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 
+                0 18px 30px -10px rgba(20, 20, 50, 0.22),
+                inset 0 0 12px rgba(255, 255, 255, 0.9);
+        }
+
+        /* Progress Bar Bergaya Spidol */
+        .skill-bar-fill {
+            background: linear-gradient(90deg, #1E1671 0%, #3729A6 88%, rgba(55, 41, 166, 0.7) 100%);
+            border-radius: 999px 12px 14px 999px;
+            transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Animasi Gantungan ID Card + Gerak Aktif Saat Kursor Diarahkan */
+        @keyframes gentleSwing {
+            0%, 100% { transform: rotate(-7deg) translateY(0px); }
+            50% { transform: rotate(-3.5deg) translateY(-4px); }
+        }
+        @keyframes idCardHoverJiggle {
+            0%   { transform: rotate(-7deg) scale(1); }
+            25%  { transform: rotate(5deg) scale(1.09) translateY(-8px); }
+            50%  { transform: rotate(-4deg) scale(1.11) translateY(-10px); }
+            75%  { transform: rotate(3deg) scale(1.09) translateY(-7px); }
+            100% { transform: rotate(-2deg) scale(1.08) translateY(-8px); }
+        }
+        .swing-card {
+            transform-origin: top center;
+            animation: gentleSwing 5s ease-in-out infinite;
+            will-change: transform;
+        }
+        .swing-card:hover {
+            animation: idCardHoverJiggle 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+            filter: drop-shadow(0 22px 28px rgba(30, 22, 113, 0.32));
+            z-index: 40;
+        }
+
+        /* Kilau Plastik ID Card Saat Hover */
+        .id-card-holder::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 0.75rem;
+            background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.65) 50%, transparent 80%);
+            transform: translateX(-120%);
+            transition: transform 0.7s ease;
+            pointer-events: none;
+        }
+        .swing-card:hover .id-card-holder::after {
+            transform: translateX(120%);
+        }
+
+        /* ==================== ANIMASI TAMBAHAN LUCU & KEREN ==================== */
+
+        /* 1. Huruf PORTOFOLIO Melompat Lucu (Boing-Boing) */
+        @keyframes letterPop {
+            0% { opacity: 0; transform: translateY(35px) scale(0.4) rotate(-15deg); }
+            70% { transform: translateY(-8px) scale(1.08); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .pop-letter {
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease;
+            animation: letterPop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        }
+        .pop-letter:hover {
+            color: #4335C6;
+            transform: translateY(-12px) scale(1.22) rotate(6deg) !important;
+            text-shadow: 0 10px 15px rgba(30, 22, 113, 0.25);
+        }
+
+        /* 2. Pesawat Kertas Terbang & Berayun */
+        @keyframes planeFly {
+            0%, 100% { transform: translate(175px, 6px) rotate(-8deg); }
+            50% { transform: translate(184px, -3px) rotate(4deg) scale(1.06); }
+        }
+        .paper-plane-anim {
+            animation: planeFly 3.2s ease-in-out infinite;
+            cursor: pointer;
+        }
+        @keyframes dashFlow {
+            to { stroke-dashoffset: -36; }
+        }
+        .flight-path-anim {
+            animation: dashFlow 2s linear infinite;
+        }
+
+        /* 3. Doodle Bintang & Smiley Bergoyang (Wiggle & Twinkle) */
+        @keyframes doodleWiggle {
+            0%, 100% { transform: rotate(-6deg) scale(1); }
+            50% { transform: rotate(8deg) scale(1.1); }
+        }
+        .wiggle-doodle {
+            animation: doodleWiggle 2.8s ease-in-out infinite;
+            transform-origin: center;
+        }
+        @keyframes starSpin {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(25deg) scale(1.22); }
+        }
+        .star-twinkle {
+            animation: starSpin 3s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        /* 4. Kilau Lensa Kacamata (Sunglasses Cool Shimmer) */
+        @keyframes lensGlint {
+            0%, 72%, 100% { transform: translateX(-30px) skewX(-20deg); opacity: 0; }
+            82% { opacity: 0.9; }
+            92% { transform: translateX(45px) skewX(-20deg); opacity: 0; }
+        }
+        .lens-shimmer {
+            animation: lensGlint 4.5s ease-in-out infinite;
+        }
+
+        /* 5. Potret Utama Bernapas Halus & Gerak2 Aktif Saat Hover */
+        @keyframes portraitFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-7px) rotate(1deg); }
+        }
+        @keyframes portraitWobbleDance {
+            0%   { transform: translateY(-6px) rotate(-3deg) scale(1.06); }
+            33%  { transform: translateY(-12px) rotate(3.5deg) scale(1.09); }
+            66%  { transform: translateY(-5px) rotate(-2.5deg) scale(1.07); }
+            100% { transform: translateY(-10px) rotate(2deg) scale(1.08); }
+        }
+        .portrait-alive {
+            animation: portraitFloat 4.2s ease-in-out infinite;
+            transition: filter 0.3s ease, transform 0.25s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+        .portrait-alive:hover {
+            animation: portraitWobbleDance 0.9s ease-in-out infinite alternate;
+            filter: drop-shadow(0 18px 25px rgba(30, 22, 113, 0.38));
+            z-index: 30;
+        }
+        /* Saat potret di-hover, kacamata ikut sedikit terangkat (efek sapaan keren) */
+        @keyframes glassesCoolBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-3px) rotate(-1.5deg); }
+        }
+        .portrait-alive:hover .cool-glasses-group,
+        .swing-card:hover .cool-glasses-group {
+            animation: glassesCoolBounce 0.55s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        /* 6. Animasi Dominan di Setiap Card (Scrapbook Interactive Cards) */
+        @keyframes cardIdleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+        }
+        .dominant-card {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            z-index: 1;
+        }
+        .dominant-card:hover {
+            transform: translateY(-10px) scale(1.03) rotate(-0.8deg) !important;
+            box-shadow: 
+                0 22px 38px -10px rgba(30, 22, 113, 0.22),
+                0 8px 0px 0px rgba(30, 22, 113, 0.85);
+            background-color: #FFFFFF;
+            border-color: rgba(30, 22, 113, 0.35);
+            z-index: 30;
+        }
+        /* Efek Goyang Banner Judul & Ikon di Dalam Card Saat Card Di-hover */
+        @keyframes badgePopWiggle {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            30% { transform: scale(1.12) rotate(-4deg); }
+            65% { transform: scale(1.08) rotate(3deg); }
+        }
+        .dominant-card:hover .brush-label {
+            animation: badgePopWiggle 0.65s ease-in-out infinite alternate;
+            background-color: #2D229E;
+            box-shadow: 4px 5px 0px rgba(245, 158, 11, 0.65);
+        }
+        @keyframes iconBounceSpin {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-6px) rotate(15deg) scale(1.18); }
+        }
+        .dominant-card:hover .card-icon-badge {
+            animation: iconBounceSpin 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+            background-color: #352BA5;
+            box-shadow: 0 6px 14px rgba(30, 22, 113, 0.35);
+        }
+        /* Selotip ikut bergeser sedikit saat card terangkat */
+        .dominant-card:hover ~ .masking-tape,
+        .card-wrapper:hover .masking-tape {
+            transform: rotate(18deg) scale(1.08) translateY(-4px);
+            transition: transform 0.35s ease;
+        }
+
+        /* 6b. Garis Kaget Komik Berkedip */
+        @keyframes comicPop {
+            0%, 100% { transform: scale(1); opacity: 0.85; }
+            50% { transform: scale(1.18) translate(-2px, -2px); opacity: 1; }
+        }
+        .comic-sparks {
+            animation: comicPop 1.8s ease-in-out infinite;
+            transform-origin: bottom right;
+        }
+
+        /* 7. Hati Berdetak (Heartbeat) */
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.28) rotate(-8deg); color: #E11D48; }
+            45% { transform: scale(0.95); }
+            65% { transform: scale(1.2) rotate(8deg); color: #E11D48; }
+        }
+        .heartbeat-icon {
+            animation: heartBeat 2.2s infinite ease-in-out;
+        }
+
+        /* 8. Lingkaran Spidol "amazing" Menggambar Sendiri */
+        @keyframes drawLoop {
+            0%, 100% { stroke-dashoffset: 0; }
+            50% { stroke-dashoffset: 220; }
+        }
+        .marker-loop {
+            stroke-dasharray: 220;
+            animation: drawLoop 5s ease-in-out infinite;
+        }
+
+        /* 9. Efek Hover Stiker Kertas & Kartu */
+        .sticker-note {
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+        }
+        .sticker-note:hover {
+            transform: rotate(0deg) scale(1.08) translateY(-4px) !important;
+            box-shadow: 0 14px 24px -6px rgba(30, 22, 113, 0.18);
+        }
+
+        /* 10. Partikel Confetti / Sparkle Klik */
+        .click-sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            animation: sparkleFly 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes sparkleFly {
+            0% { opacity: 1; transform: translate(0, 0) scale(0.4) rotate(0deg); }
+            100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(1.2) rotate(var(--rot)); }
+        }
+
+        /* 11. Animasi Masuk Seksi (Fade Up) */
+        @keyframes fadeUpScrapbook {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up-1 { animation: fadeUpScrapbook 0.7s ease-out 0.1s backwards; }
+        .fade-up-2 { animation: fadeUpScrapbook 0.7s ease-out 0.25s backwards; }
+        .fade-up-3 { animation: fadeUpScrapbook 0.7s ease-out 0.4s backwards; }
+    </style>
+</head>
+<body class="min-h-screen text-slate-900 selection:bg-ink selection:text-white py-4 px-2 sm:px-6 lg:px-10 flex flex-col justify-center items-center">
+
+    <!-- Toast Notifikasi Salin Kontak & Upload Foto -->
+    <div id="toast" class="fixed top-5 right-5 z-50 transform translate-x-full opacity-0 transition-all duration-300 bg-ink text-white px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2.5 font-sans text-sm">
+        <i class="fa-solid fa-circle-check text-emerald-300"></i>
+        <span id="toast-msg">Tersalin ke papan klip!</span>
+    </div>
+
+    <!-- Input File Tersembunyi agar User bisa mengganti foto jika diinginkan -->
+    <input type="file" id="photoInput" accept="image/*" class="hidden" />
+
+    <!-- KANVAS UTAMA SCRAPBOOK -->
+    <main class="w-full max-w-[1400px] scrapbook-card rounded-2xl overflow-hidden relative pt-6 pb-16 px-4 sm:px-8 lg:px-12 shadow-2xl border border-stone-200/80">
+        
+        <!-- Tekstur Bercak Halus di Sudut Kertas -->
+        <div class="pointer-events-none absolute inset-0 opacity-25 bg-[radial-gradient(#c7c2b8_1px,transparent_1px)] [background-size:32px_32px]"></div>
+
+        <!-- Tombol Interaktif Kecil di Kanan Atas untuk Efek Sparkle, Ganti Foto & Print -->
+        <div class="relative z-30 flex flex-wrap justify-end gap-2 mb-2 sm:absolute sm:top-4 sm:right-6">
+            <button onclick="celebrateConfetti(event)" class="text-xs font-sans font-semibold bg-amber-100/90 hover:bg-ink hover:text-white text-ink border border-ink/20 px-3 py-1.5 rounded-full shadow-sm transition transform hover:scale-105 active:scale-95 flex items-center gap-1.5" title="Klik untuk kejutan animasi!">
+                <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i> Cheer!
+            </button>
+            <button onclick="triggerPhotoUpload()" class="text-xs font-sans font-medium bg-white/90 hover:bg-ink hover:text-white text-ink border border-ink/20 px-3 py-1.5 rounded-full shadow-sm transition transform hover:scale-105 flex items-center gap-1.5" title="Ganti Foto Profil dengan Foto Anda">
+                <i class="fa-solid fa-camera"></i> Ganti Foto
+            </button>
+            
+        </div>
+
+        <!-- ==================== BAGIAN ATAS (HERO, ID CARD, ABOUT ME, DATA PRIBADI) ==================== -->
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start fade-up-1">
+
+            <!-- KOLOM KIRI: ID CARD LANYARD & POTRET UTAMA (5 Kolom di Desktop) -->
+            <div class="lg:col-span-5 relative flex flex-col sm:flex-row items-center justify-center lg:justify-start pt-4 sm:pt-8 min-h-[380px]">
+                
+                <!-- Doodle "ideas create inspire" di kiri atas -->
+                <div class="absolute top-0 left-36 sm:left-48 z-20 hidden sm:block select-none pointer-events-none">
+                    <div class="relative font-hand text-sm leading-tight text-slate-800 text-center -rotate-12 wiggle-doodle">
+                        <span class="block">ideas</span>
+                        <span class="block font-bold text-ink">create</span>
+                        <span class="block">inspire</span>
+                        <!-- Lingkaran Oval Spiral SVG -->
+                        <svg class="w-28 h-20 -mt-14 -ml-3 text-slate-800" viewBox="0 0 120 80" fill="none">
+                            <ellipse cx="60" cy="42" rx="48" ry="22" stroke="currentColor" stroke-width="1.4" transform="rotate(-8 60 42)"/>
+                            <ellipse cx="60" cy="44" rx="50" ry="20" stroke="currentColor" stroke-width="1" stroke-dasharray="3 2" transform="rotate(-4 60 44)"/>
+                            <!-- Bintang Kecil -->
+                            <path d="M98 10 L100 18 L108 20 L100 22 L98 30 L96 22 L88 20 L96 18 Z" fill="currentColor"/>
+                            <path d="M22 65 C10 50, 15 20, 40 12 C65 5, 85 10, 95 16" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/>
+                        </svg>
+                    </div>
+                    <!-- Bintang Doodle Bawahnya -->
+                    <svg class="w-9 h-9 text-slate-800 ml-8 mt-1 star-twinkle" viewBox="0 0 40 40" fill="none">
+                        <path d="M20 2 L23 15 L36 12 L25 21 L33 33 L20 25 L9 34 L15 21 L4 13 L17 15 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+
+                <!-- 1. LANYARD & ID CARD (Gerak2 Aktif Saat Kursor Diarahkan) -->
+                <div id="idCardInteractive" class="relative z-20 swing-card cursor-pointer group -mt-6 sm:-mt-10 lg:-ml-2" onclick="triggerPhotoUpload()" title="Arahkan mouse atau klik untuk mengganti foto">
+                    <!-- Tali Lanyard Ungu/Biru -->
+                    <div class="w-16 h-28 mx-auto -mb-3 relative flex justify-center">
+                        <svg viewBox="0 0 80 120" class="w-full h-full drop-shadow-md">
+                            <!-- Pita Belakang -->
+                            <path d="M10 0 L32 95 L48 95 L28 0 Z" fill="#2A1B8C"/>
+                            <!-- Pita Depan dengan Kilau Satin -->
+                            <path d="M24 0 L48 95 L30 95 L5 0 Z" fill="url(#lanyardGrad)"/>
+                            <!-- Gesper Plastik Ungu -->
+                            <rect x="23" y="54" width="30" height="12" rx="4" fill="#6E63B6" stroke="#493D96" stroke-width="1.5" transform="rotate(-12 38 60)"/>
+                            <!-- Klip Penjepit Bawah -->
+                            <path d="M28 90 L52 86 L55 108 L25 112 Z" fill="#D4D4D8" stroke="#A1A1AA" stroke-width="1.5"/>
+                            <rect x="33" y="96" width="14" height="6" rx="2" fill="#71717A" transform="rotate(-7 40 99)"/>
+                            <defs>
+                                <linearGradient id="lanyardGrad" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#312396"/>
+                                    <stop offset="50%" stop-color="#5546C8"/>
+                                    <stop offset="100%" stop-color="#1E1466"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    <!-- Casing Plastik Transparan ID Card -->
+                    <div class="id-card-holder p-2.5 pt-5 rounded-xl w-[185px] sm:w-[195px] relative">
+                        <!-- Lubang Gantungan ID Card -->
+                        <div class="w-10 h-2.5 bg-stone-300/80 border border-stone-400/50 rounded-full mx-auto -mt-3 mb-2.5 shadow-inner"></div>
+                        
+                        <!-- Kertas Dalam ID Card -->
+                        <div class="bg-[#F9F8F6] p-2.5 pb-4 rounded-lg shadow-sm border border-stone-200">
+                            <!-- Foto di Dalam ID Card -->
+                            <div class="w-full aspect-[4/4.3] rounded overflow-hidden bg-sky-100 relative border border-stone-200">
+                                <img id="idCardImg" src="" alt="Ahmad Asep Suhendi" class="w-full h-full object-cover hidden">
+                                <!-- Ilustrasi Vektor Dosen Berkacamata & Jas (Default sesuai gambar) -->
+                                <svg id="idCardSvg" viewBox="0 0 240 260" class="w-full h-full object-cover">
+                                    <!-- Background Langit & Bangunan Kampus Blur -->
+                                    <rect width="240" height="260" fill="#CFE2F3"/>
+                                    <path d="M0 150 L90 110 L95 260 L0 260 Z" fill="#B4C6D0"/>
+                                    <path d="M0 165 L85 130 L85 260 L0 260 Z" fill="#CBD5CD"/>
+                                    <line x1="0" y1="155" x2="88" y2="115" stroke="#8C6D53" stroke-width="6"/>
+                                    <line x1="15" y1="148" x2="45" y2="210" stroke="#A6896F" stroke-width="4"/>
+                                    <line x1="50" y1="133" x2="75" y2="195" stroke="#A6896F" stroke-width="4"/>
+                                    <!-- Jas & Dasi -->
+                                    <path d="M20 260 C25 205, 65 192, 120 192 C175 192, 215 205, 220 260 Z" fill="#18181B"/>
+                                    <path d="M88 188 L120 255 L152 188 Z" fill="#FFFFFF"/>
+                                    <!-- Kerah Kemeja -->
+                                    <polygon points="88,185 120,214 102,226 80,195" fill="#F4F4F5"/>
+                                    <polygon points="152,185 120,214 138,226 160,195" fill="#F4F4F5"/>
+                                    <!-- Dasi Hitam -->
+                                    <polygon points="113,210 127,210 131,223 120,228 109,223" fill="#18181B"/>
+                                    <polygon points="114,225 126,225 132,260 108,260" fill="#27272A"/>
+                                    <!-- Kerah Jas -->
+                                    <path d="M62 200 L88 186 L108 260 L55 260 Z" fill="#27272A"/>
+                                    <path d="M178 200 L152 186 L132 260 L185 260 Z" fill="#27272A"/>
+                                    <!-- Leher -->
+                                    <path d="M92 155 L92 195 L120 212 L148 195 L148 155 Z" fill="#D99B66"/>
+                                    <path d="M95 165 Q120 185 145 165 Z" fill="#B87A4B" opacity="0.45"/>
+                                    <!-- Telinga -->
+                                    <ellipse cx="74" cy="126" rx="9" ry="16" fill="#D99B66" transform="rotate(-8 74 126)"/>
+                                    <ellipse cx="166" cy="126" rx="9" ry="16" fill="#C58654" transform="rotate(8 166 126)"/>
+                                    <!-- Wajah -->
+                                    <path d="M74 88 C74 55, 166 55, 166 88 C168 128, 162 162, 138 176 C126 183, 114 183, 102 176 C78 162, 72 128, 74 88 Z" fill="url(#skinGrad1)"/>
+                                    <!-- Rambut -->
+                                    <path d="M72 112 C65 88, 68 58, 90 48 C102 36, 138 36, 154 48 C172 58, 174 86, 166 112 C164 92, 158 76, 148 68 C128 62, 95 65, 80 76 C74 85, 74 100, 72 112 Z" fill="#141418"/>
+                                    <path d="M84 52 Q118 32 152 50 Q128 42 92 58 Z" fill="#272730"/>
+                                    <!-- Alis -->
+                                    <path d="M84 96 Q98 90 110 95" stroke="#18181B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                                    <path d="M126 95 Q140 90 152 96" stroke="#18181B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                                    <!-- Kacamata Hitam Aviator Square -->
+                                    <g class="cool-glasses-group">
+                                        <!-- Gagang & Frame -->
+                                        <path d="M72 106 L80 104 M156 104 L167 108" stroke="#3B5366" stroke-width="4" stroke-linecap="round"/>
+                                        <rect x="78" y="99" width="36" height="26" rx="6" fill="url(#lensGrad)" stroke="#29323C" stroke-width="3"/>
+                                        <rect x="122" y="99" width="36" height="26" rx="6" fill="url(#lensGrad)" stroke="#29323C" stroke-width="3"/>
+                                        <path d="M114 104 Q118 101 122 104" stroke="#8595A6" stroke-width="3" fill="none"/>
+                                        <!-- Refleksi Kacamata -->
+                                        <path d="M83 103 L96 103 L86 121 L81 121 Z" fill="rgba(255,255,255,0.22)"/>
+                                        <path d="M127 103 L140 103 L130 121 L125 121 Z" fill="rgba(255,255,255,0.22)"/>
+                                    </g>
+                                    <!-- Hidung -->
+                                    <path d="M116 108 L113 132 Q118 137 125 132" stroke="#A96C3E" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                                    <!-- Kumis Tipis & Bibir -->
+                                    <path d="M102 146 Q118 140 134 146" stroke="#2D231E" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                                    <path d="M104 151 Q118 147 132 151 Q118 156 104 151 Z" fill="#B56557"/>
+                                    <path d="M106 151 Q118 152 130 151" stroke="#7A3E34" stroke-width="1.2" fill="none"/>
+                                    <!-- Janggut Goatee di Dagu -->
+                                    <path d="M106 171 Q118 180 130 171 Q124 178 118 178 Q112 178 106 171 Z" fill="#231F20"/>
+                                    <path d="M115 158 L119 164" stroke="#231F20" stroke-width="2" stroke-linecap="round"/>
+                                    <defs>
+                                        <linearGradient id="skinGrad1" x1="0" y1="0" x2="1" y2="1">
+                                            <stop offset="0%" stop-color="#F1B88A"/>
+                                            <stop offset="60%" stop-color="#DF9E6B"/>
+                                            <stop offset="100%" stop-color="#C17C4A"/>
+                                        </linearGradient>
+                                        <linearGradient id="lensGrad" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stop-color="#1E2024"/>
+                                            <stop offset="55%" stop-color="#4A3B2C"/>
+                                            <stop offset="100%" stop-color="#76583F"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+
+                            <!-- Nama di ID Card -->
+                            <div class="mt-3 px-1 font-hand text-slate-900">
+                                <p class="text-xl font-bold leading-none tracking-wide">Ahmad Asep</p>
+                                <p class="text-xl font-bold leading-tight tracking-wide">Suhendi</p>
+                                <p class="text-sm text-slate-700 mt-1">Lecturer</p>
+                                <!-- Coretan Garis Bawah Biru -->
+                                <svg class="w-20 h-3 mt-0.5 text-ink" viewBox="0 0 100 14" fill="none">
+                                    <path d="M2 6 Q45 2 96 5 M12 11 Q50 8 82 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Selotip Kertas di Kiri Bawah ID Card -->
+                    <div class="masking-tape w-16 h-6 absolute -bottom-3 -left-6 rotate-[38deg] pointer-events-none"></div>
+                </div>
+
+                <!-- 2. POTRET CUTOUT UTAMA (Di Sebelah Kanan ID Card) -->
+                <div class="relative z-10 -mt-6 sm:mt-16 sm:-ml-6 flex flex-col items-center">
+                    <!-- Garis Aksen Kaget/Bersinar di Kiri Kepala -->
+                    <svg class="w-10 h-12 text-slate-800 absolute -left-6 top-10 hidden sm:block comic-sparks" viewBox="0 0 40 50" fill="none">
+                        <line x1="32" y1="8" x2="26" y2="2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <line x1="25" y1="22" x2="10" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <line x1="24" y1="32" x2="6" y2="30" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        <line x1="26" y1="40" x2="12" y2="44" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+
+                    <!-- Gambar Cutout Dosen dengan Outline Biru Tua (Gerak2 Mengikuti Mouse) -->
+                    <div id="portraitInteractive" class="w-56 sm:w-64 md:w-72 relative cursor-pointer group portrait-alive" onclick="triggerPhotoUpload()" title="Arahkan kursor atau klik untuk mengganti foto">
+                        <img id="mainPortraitImg" src="" alt="Potret Utama Ahmad Asep Suhendi" class="w-full h-auto max-h-[300px] object-contain drop-shadow-[0_4px_10px_rgba(30,22,113,0.3)] hidden rounded-b-2xl">
+                        
+                        <!-- SVG Cutout Besar dengan Outline Biru Tua (Default sesuai gambar) -->
+                        <svg id="mainPortraitSvg" viewBox="0 0 300 310" class="w-full h-auto drop-shadow-md">
+                            <!-- Outline Biru Tua di Sekeliling Tubuh & Rambut -->
+                            <path d="M35 298 C40 225, 78 205, 112 196 L112 175 C94 162, 88 142, 84 128 C78 122, 80 105, 86 98 C82 72, 86 42, 112 30 C130 16, 174 16, 194 32 C214 44, 218 74, 212 98 C220 105, 220 124, 212 130 C208 150, 200 168, 184 176 L184 196 C222 205, 258 225, 265 298 Z" 
+                                  fill="#251B82" stroke="#251B82" stroke-width="10" stroke-linejoin="round"/>
+                            
+                            <!-- Jas Hitam -->
+                            <path d="M40 296 C46 230, 82 210, 148 210 C214 210, 250 230, 258 296 Z" fill="#18181B"/>
+                            <!-- Kemeja Putih -->
+                            <path d="M110 204 L148 288 L186 204 Z" fill="#FFFFFF"/>
+                            <!-- Kerah Kemeja -->
+                            <polygon points="110,200 148,235 126,250 100,214" fill="#F4F4F5"/>
+                            <polygon points="186,200 148,235 170,250 196,214" fill="#E4E4E7"/>
+                            <!-- Dasi Hitam -->
+                            <polygon points="139,230 157,230 161,246 148,252 135,246" fill="#141416"/>
+                            <polygon points="140,248 156,248 164,296 132,296" fill="#232329"/>
+                            <!-- Kerah Jas (Lapel) -->
+                            <path d="M78 218 L110 202 L134 296 L70 296 Z" fill="#27272A"/>
+                            <path d="M218 218 L186 202 L162 296 L226 296 Z" fill="#222225"/>
+                            <!-- Leher -->
+                            <path d="M114 166 L114 210 L148 232 L182 210 L182 166 Z" fill="#D89864"/>
+                            <path d="M116 178 Q148 202 180 178 L180 194 Q148 214 116 194 Z" fill="#B57545" opacity="0.45"/>
+                            <!-- Telinga -->
+                            <ellipse cx="92" cy="130" rx="11" ry="20" fill="#DF9E6B" transform="rotate(-8 92 130)"/>
+                            <ellipse cx="204" cy="130" rx="11" ry="20" fill="#C48352" transform="rotate(8 204 130)"/>
+                            <!-- Wajah -->
+                            <path d="M92 84 C92 44, 204 44, 204 84 C206 132, 198 172, 170 190 C156 198, 140 198, 126 190 C98 172, 90 132, 92 84 Z" fill="url(#skinGrad2)"/>
+                            <!-- Rambut Detail -->
+                            <path d="M90 114 C82 86, 86 50, 112 36 C128 22, 170 22, 190 36 C210 50, 212 82, 204 114 C200 90, 194 70, 182 60 C156 54, 118 56, 100 70 C92 82, 92 98, 90 114 Z" fill="#141418"/>
+                            <!-- Tekstur Helai Rambut -->
+                            <path d="M104 42 Q146 20 186 40" stroke="#2E2E38" stroke-width="3" fill="none"/>
+                            <path d="M112 52 Q150 34 182 50" stroke="#2E2E38" stroke-width="2" fill="none"/>
+                            <!-- Alis -->
+                            <path d="M104 94 Q120 87 136 93" stroke="#18181B" stroke-width="4" stroke-linecap="round" fill="none"/>
+                            <path d="M156 93 Q172 87 188 94" stroke="#18181B" stroke-width="4" stroke-linecap="round" fill="none"/>
+                            <!-- Kacamata Hitam dengan Gagang Biru -->
+                            <g class="cool-glasses-group">
+                                <path d="M89 107 L98 104 M192 104 L206 109" stroke="#3B6E8C" stroke-width="5" stroke-linecap="round"/>
+                                <rect x="96" y="98" width="44" height="32" rx="7" fill="url(#lensGrad2)" stroke="#2A343D" stroke-width="3.5"/>
+                                <rect x="150" y="98" width="44" height="32" rx="7" fill="url(#lensGrad2)" stroke="#2A343D" stroke-width="3.5"/>
+                                <path d="M140 104 Q145 100 150 104" stroke="#94A3B8" stroke-width="3.5" fill="none"/>
+                                <!-- Kilau Siluet Gedung di Lensa Kacamata (Animasi Shimmer Keren) -->
+                                <path class="lens-shimmer" d="M102 103 L118 103 L106 125 L100 125 Z" fill="rgba(255,255,255,0.45)"/>
+                                <path class="lens-shimmer" d="M156 103 L172 103 L160 125 L154 125 Z" fill="rgba(255,255,255,0.45)"/>
+                            </g>
+                            <!-- Hidung -->
+                            <path d="M143 108 L139 138 Q145 144 154 138" stroke="#A6683B" stroke-width="3" stroke-linecap="round" fill="none"/>
+                            <!-- Kumis & Bibir -->
+                            <path d="M126 154 Q145 147 164 154" stroke="#2A201B" stroke-width="3" stroke-linecap="round" fill="none"/>
+                            <path d="M128 160 Q145 155 162 160 Q145 167 128 160 Z" fill="#B86658"/>
+                            <path d="M130 160 Q145 162 160 160" stroke="#783B31" stroke-width="1.5" fill="none"/>
+                            <!-- Janggut Dagu -->
+                            <path d="M130 183 Q145 194 160 183 Q152 192 145 192 Q138 192 130 183 Z" fill="#1F1B1C"/>
+                            <path d="M142 168 L146 175" stroke="#1F1B1C" stroke-width="2.5" stroke-linecap="round"/>
+
+                            <defs>
+                                <linearGradient id="skinGrad2" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#F3BC8E"/>
+                                    <stop offset="55%" stop-color="#DF9D69"/>
+                                    <stop offset="100%" stop-color="#BE7847"/>
+                                </linearGradient>
+                                <linearGradient id="lensGrad2" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#191B1F"/>
+                                    <stop offset="55%" stop-color="#48392A"/>
+                                    <stop offset="100%" stop-color="#7A5A40"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    <!-- Sapuan Kuas Cat Biru di Bawah Potret -->
+                    <svg class="w-80 sm:w-[420px] h-8 -mt-4 sm:-mr-28 z-20 pointer-events-none" viewBox="0 0 450 32" fill="none">
+                        <path d="M8 16 Q180 6 435 14 Q320 20 15 24 Z" fill="#2A1E8C" opacity="0.85"/>
+                        <path d="M25 22 Q220 15 445 21" stroke="#4F43B8" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- KOLOM TENGAH & KANAN ATAS: JUDUL PORTOFOLIO, ABOUT ME & DATA PRIBADI (7 Kolom di Desktop) -->
+            <div class="lg:col-span-7 flex flex-col">
+                
+                <!-- HEADER JUDUL BESAR "PORTOFOLIO" + PESAWAT KERTAS -->
+                <div class="relative flex flex-col items-center lg:items-start mb-4">
+                    <div class="relative flex items-center justify-center w-full lg:justify-start lg:pl-4">
+                        <!-- Teks PORTOFOLIO Melengkung Halus + Animasi Boing Interaktif per Huruf -->
+                        <h1 class="font-brush text-6xl sm:text-7xl md:text-[86px] leading-none tracking-wider text-ink select-none drop-shadow-sm flex items-baseline">
+                            <span style="animation-delay: 0.05s" class="pop-letter transform -rotate-12 translate-y-3">P</span>
+                            <span style="animation-delay: 0.10s" class="pop-letter transform -rotate-6 translate-y-1">O</span>
+                            <span style="animation-delay: 0.15s" class="pop-letter transform -rotate-3 translate-y-0.5">R</span>
+                            <span style="animation-delay: 0.20s" class="pop-letter transform -rotate-1">T</span>
+                            <span style="animation-delay: 0.25s" class="pop-letter transform rotate-1">O</span>
+                            <span style="animation-delay: 0.30s" class="pop-letter transform rotate-2 translate-y-0.5">F</span>
+                            <span style="animation-delay: 0.35s" class="pop-letter transform rotate-3 translate-y-1">O</span>
+                            <span style="animation-delay: 0.40s" class="pop-letter transform rotate-6 translate-y-1.5">L</span>
+                            <span style="animation-delay: 0.45s" class="pop-letter transform rotate-6 translate-y-2">I</span>
+                            <span style="animation-delay: 0.50s" class="pop-letter transform rotate-12 translate-y-3">O</span>
+                        </h1>
+
+                        <!-- Doodle Pesawat Kertas & Garis Putus-putus Berbentuk Loop -->
+                        <div class="hidden sm:block w-44 md:w-56 h-28 -ml-2 -mt-6">
+                            <svg viewBox="0 0 230 110" fill="none" class="w-full h-full text-slate-900 overflow-visible">
+                                <!-- Jalur Putus-Putus Berkelok Mengalir -->
+                                <path class="flight-path-anim" d="M5 92 C45 92, 65 98, 65 80 C65 60, 95 55, 115 62 C135 68, 145 50, 130 38 C115 26, 98 42, 112 54 C128 66, 158 45, 178 30" 
+                                      stroke="currentColor" stroke-width="1.6" stroke-dasharray="5 4" stroke-linecap="round"/>
+                                <!-- Pesawat Kertas Melayang -->
+                                <g class="paper-plane-anim" onclick="launchPaperPlane(this)" title="Klik untuk menerbangkan pesawat!">
+                                    <path d="M2 22 L46 2 L28 38 L20 26 L2 22 Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="#F7F6F2"/>
+                                    <path d="M46 2 L20 26 L21 36 L26 31" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <!-- Doodle Wajah Tersenyum di Kanan Atas -->
+                        <div class="hidden xl:block absolute -right-2 top-12 cursor-pointer" onclick="celebrateConfetti(event)" title="Halo! Klik aku!">
+                            <svg class="w-12 h-12 text-slate-900 wiggle-doodle hover:text-ink transition" viewBox="0 0 50 50" fill="none">
+                                <path d="M15 22 C10 18, 12 10, 18 12 C20 6, 28 6, 30 12 C36 10, 40 16, 36 22 C40 28, 36 38, 25 38 C14 38, 10 28, 15 22 Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="21" cy="21" r="1.5" fill="currentColor"/>
+                                <circle cx="29" cy="21" r="1.5" fill="currentColor"/>
+                                <path d="M18 26 Q25 33 32 25" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Banner Sapuan Kuas Hitam "LECTURER" -->
+                    <div class="mt-2 lg:ml-36 flex flex-col items-center group cursor-pointer" onclick="celebrateConfetti(event)">
+                        <div class="brush-black group-hover:scale-105 group-hover:rotate-1 transition duration-300">
+                            <span class="font-hand text-xl sm:text-2xl tracking-[0.18em] uppercase text-white">LECTURER</span>
+                        </div>
+                        <!-- Coretan Garis Bawah LECTURER -->
+                        <svg class="w-40 h-5 -mt-0.5 text-slate-900 group-hover:scale-x-110 transition" viewBox="0 0 180 22" fill="none">
+                            <path d="M5 6 L175 3 M45 11 L145 8 M75 16 L130 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- BARIS TENGAH: ABOUT ME & KARTU DATA PRIBADI -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start mt-1">
+                    
+                    <!-- ABOUT ME (6 Kolom - Kini memiliki animasi card dominan juga) -->
+                    <div class="md:col-span-6 px-3 py-3 rounded-xl dominant-card bg-[#F7F6F2]/70 border border-transparent">
+                        <div class="flex items-center gap-2 mb-2">
+                            <!-- Panah Keriting Doodle -->
+                            <svg class="w-7 h-10 text-slate-800 -ml-2 wiggle-doodle" viewBox="0 0 32 45" fill="none">
+                                <path d="M22 4 C10 2, 6 14, 16 18 C22 20, 12 24, 10 30 C8 35, 14 40, 22 40" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                                <path d="M17 35 L23 40 L16 43" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <h2 class="font-kalam text-2xl sm:text-3xl font-bold text-ink">About me</h2>
+                        </div>
+
+                        <div class="font-hand text-[15px] sm:text-base leading-relaxed text-slate-900 space-y-3">
+                            <p>
+                                Pria tangguh, pekerja keras, dan pembelajar yang terus berkembang.
+                                Menjalani dua peran sebagai pengajar dan pegawai perusahaan swasta,
+                                sekaligus menjadi suami dan ayah dari tiga anak laki-laki.
+                            </p>
+                            <p class="pl-2 border-l-2 border-ink/20 sm:border-none sm:pl-3">
+                                Bekerja dengan passion, belajar dari pengalaman, membangun sesuatu
+                                yang bermanfaat, dan menikmati hidup lewat liburan bersama keluarga.
+                                Karena bagi saya, hidup bukan hanya tentang bekerja keras, tetapi juga
+                                tentang keluarga, keseimbangan, dan menikmati setiap prosesnya.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- KARTU DATA PRIBADI (6 Kolom) -->
+                    <div class="md:col-span-6 relative card-wrapper">
+                        <!-- Selotip Kertas di Kanan Atas Kartu Data Pribadi -->
+                        <div class="masking-tape w-24 h-7 absolute -top-3 -right-4 rotate-[25deg] z-40 pointer-events-none transition-transform duration-300"></div>
+
+                        <div class="scrapbook-card torn-edge-bottom dominant-card rounded-lg p-5 sm:p-6 border border-stone-200/90 shadow-md">
+                            <!-- Judul Seksi Data Pribadi -->
+                            <div class="flex items-center gap-2.5 mb-5">
+                                <div class="card-icon-badge w-9 h-9 rounded-full bg-ink text-white flex items-center justify-center shadow-sm shrink-0 transition">
+                                    <i class="fa-solid fa-user text-sm"></i>
+                                </div>
+                                <div>
+                                    <div class="brush-label">
+                                        <h3 class="font-hand text-lg sm:text-xl tracking-wide">Data Pribadi</h3>
+                                    </div>
+                                    <div class="h-0.5 w-24 bg-ink/70 rounded-full ml-3 mt-0.5"></div>
+                                </div>
+                            </div>
+
+                            <!-- Daftar Data Pribadi -->
+                            <div class="space-y-3.5 font-sans text-xs sm:text-[13.5px] text-slate-800">
+                                <!-- Nama -->
+                                <div class="grid grid-cols-12 items-start gap-1">
+                                    <div class="col-span-4 flex items-center gap-2.5 font-semibold text-slate-900">
+                                        <i class="fa-solid fa-user text-ink text-base w-4 text-center"></i>
+                                        <span>Nama</span>
+                                    </div>
+                                    <div class="col-span-8 flex items-start gap-1.5">
+                                        <span class="font-semibold">:</span>
+                                        <span class="font-medium text-slate-900">Ahmad Asep Suhendi, S.Kom, M.Kom</span>
+                                    </div>
+                                </div>
+
+                                <!-- Alamat -->
+                                <div class="grid grid-cols-12 items-start gap-1">
+                                    <div class="col-span-4 flex items-center gap-2.5 font-semibold text-slate-900">
+                                        <i class="fa-solid fa-house-chimney text-ink text-base w-4 text-center"></i>
+                                        <span>Alamat</span>
+                                    </div>
+                                    <div class="col-span-8 flex items-start gap-1.5">
+                                        <span class="font-semibold">:</span>
+                                        <span>Rawa Mekar Jaya, Bsd Serpong<br>Tangerang Selatan</span>
+                                    </div>
+                                </div>
+
+                                <!-- Telepon -->
+                                <div class="grid grid-cols-12 items-center gap-1 group cursor-pointer" onclick="copyText('0851-5977-4347', 'Nomor telepon disalin!')">
+                                    <div class="col-span-4 flex items-center gap-2.5 font-semibold text-slate-900">
+                                        <i class="fa-solid fa-phone-volume text-ink text-base w-4 text-center"></i>
+                                        <span>Telepon</span>
+                                    </div>
+                                    <div class="col-span-8 flex items-center gap-1.5">
+                                        <span class="font-semibold">:</span>
+                                        <span class="group-hover:text-ink group-hover:underline transition">0851-5977-4347</span>
+                                        <i class="fa-regular fa-copy text-[11px] text-slate-400 opacity-0 group-hover:opacity-100 transition ml-1"></i>
+                                    </div>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="grid grid-cols-12 items-center gap-1 group cursor-pointer" onclick="copyText('dosen02975@unpam.ac.id', 'Alamat email disalin!')">
+                                    <div class="col-span-4 flex items-center gap-2.5 font-semibold text-slate-900">
+                                        <i class="fa-solid fa-envelope text-ink text-base w-4 text-center"></i>
+                                        <span>Email</span>
+                                    </div>
+                                    <div class="col-span-8 flex items-center gap-1.5">
+                                        <span class="font-semibold">:</span>
+                                        <span class="group-hover:text-ink group-hover:underline transition break-all">dosen02975@unpam.ac.id</span>
+                                        <i class="fa-regular fa-copy text-[11px] text-slate-400 opacity-0 group-hover:opacity-100 transition ml-1"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== BAGIAN BAWAH (PENDIDIKAN, PENGALAMAN KERJA, CONTACT, KEAHLIAN) ==================== -->
+        <div class="relative z-10 mt-8 scrapbook-card torn-edge-bottom rounded-xl p-4 sm:p-6 border border-stone-200/90 shadow-md fade-up-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-6 xl:gap-4">
+
+                <!-- 1. PENDIDIKAN (3 Kolom - Animasi Card Dominan) -->
+                <div class="xl:col-span-3 p-4 rounded-xl dominant-card bg-[#F7F6F2] border border-stone-200/70 relative flex flex-col justify-between group">
+                    <div>
+                        <!-- Header Pendidikan -->
+                        <div class="flex items-center gap-2.5 mb-5">
+                            <div class="card-icon-badge w-9 h-9 rounded-full bg-ink text-white flex items-center justify-center shadow-sm shrink-0 transition">
+                                <i class="fa-solid fa-graduation-cap text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="brush-label">
+                                    <h3 class="font-hand text-lg sm:text-xl tracking-wide">Pendidikan</h3>
+                                </div>
+                                <div class="h-0.5 w-20 bg-ink/70 rounded-full ml-3 mt-0.5"></div>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Pendidikan -->
+                        <div class="relative pl-6 space-y-6 font-sans">
+                            <!-- Garis Putus-putus Timeline -->
+                            <div class="absolute left-[7px] top-2 bottom-6 border-l-2 border-dashed border-ink"></div>
+
+                            <!-- Item 1 -->
+                            <div class="relative hover:translate-x-1 transition">
+                                <span class="w-3.5 h-3.5 rounded-full bg-ink absolute -left-[23px] top-1 ring-4 ring-[#F7F6F2] group-hover:scale-125 transition"></span>
+                                <p class="text-sm font-bold text-ink">2018 - 2021</p>
+                                <p class="text-sm font-semibold text-slate-800 mt-0.5">S2 Universitas Pamulang</p>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="relative hover:translate-x-1 transition">
+                                <span class="w-3.5 h-3.5 rounded-full bg-ink absolute -left-[23px] top-1 ring-4 ring-[#F7F6F2] group-hover:scale-125 transition"></span>
+                                <p class="text-sm font-bold text-ink">2013 - 2017</p>
+                                <p class="text-sm font-semibold text-slate-800 mt-0.5">S1 Universitas Pamulang</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ilustrasi Doodle Gedung Kampus di Kanan Bawah Pendidikan -->
+                    <div class="self-end -mt-12 sm:-mt-16 mr-1 pointer-events-none group-hover:-translate-y-2 group-hover:scale-110 group-hover:rotate-6 transition duration-300">
+                        <svg class="w-20 h-24 text-ink/75" viewBox="0 0 90 100" fill="none">
+                            <!-- Bendera di Puncak -->
+                            <line x1="45" y1="6" x2="45" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M45 7 L60 11 L45 16 Z" stroke="currentColor" stroke-width="1.8" fill="rgba(30,22,113,0.15)"/>
+                            <!-- Atap Segitiga (Pediment) -->
+                            <polygon points="10,44 45,22 80,44" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="rgba(30,22,113,0.08)"/>
+                            <polygon points="18,41 45,26 72,41" stroke="currentColor" stroke-width="1.2"/>
+                            <!-- Balok Atas & Bawah -->
+                            <rect x="12" y="44" width="66" height="5" stroke="currentColor" stroke-width="1.8" fill="#F7F6F2"/>
+                            <!-- Pilar-Pilar -->
+                            <rect x="17" y="49" width="7" height="34" stroke="currentColor" stroke-width="1.6" fill="rgba(30,22,113,0.1)"/>
+                            <rect x="33" y="49" width="7" height="34" stroke="currentColor" stroke-width="1.6" fill="rgba(30,22,113,0.1)"/>
+                            <rect x="50" y="49" width="7" height="34" stroke="currentColor" stroke-width="1.6" fill="rgba(30,22,113,0.1)"/>
+                            <rect x="66" y="49" width="7" height="34" stroke="currentColor" stroke-width="1.6" fill="rgba(30,22,113,0.1)"/>
+                            <!-- Tangga Bawah -->
+                            <rect x="10" y="83" width="70" height="5" rx="1" stroke="currentColor" stroke-width="1.8" fill="#F7F6F2"/>
+                            <rect x="6" y="88" width="78" height="6" rx="1" stroke="currentColor" stroke-width="1.8" fill="rgba(30,22,113,0.18)"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- 2. PENGALAMAN KERJA (4 Kolom - Animasi Card Dominan) -->
+                <div class="xl:col-span-4 p-4 rounded-xl dominant-card bg-[#F7F6F2] border border-stone-200/70 relative flex flex-col justify-between group">
+                    <div>
+                        <!-- Header Pengalaman Kerja -->
+                        <div class="flex items-center gap-2.5 mb-5">
+                            <div class="card-icon-badge w-9 h-9 rounded-full bg-ink text-white flex items-center justify-center shadow-sm shrink-0 transition">
+                                <i class="fa-solid fa-briefcase text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="brush-label">
+                                    <h3 class="font-hand text-lg sm:text-xl tracking-wide">Pengalaman Kerja</h3>
+                                </div>
+                                <div class="h-0.5 w-28 bg-ink/70 rounded-full ml-3 mt-0.5"></div>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Pengalaman Kerja -->
+                        <div class="relative pl-6 space-y-5 font-sans pr-16 sm:pr-20">
+                            <!-- Garis Putus-putus Timeline -->
+                            <div class="absolute left-[7px] top-2 bottom-10 border-l-2 border-dashed border-ink"></div>
+
+                            <!-- Item 1 -->
+                            <div class="relative hover:translate-x-1 transition">
+                                <span class="w-3.5 h-3.5 rounded-full bg-ink absolute -left-[23px] top-1 ring-4 ring-[#F7F6F2] group-hover:scale-125 transition"></span>
+                                <p class="text-sm font-bold text-ink">2009 - 2026</p>
+                                <p class="text-sm font-bold text-slate-900">Salah satu Perusahaan di Cikupa</p>
+                                <p class="text-xs text-slate-700 leading-relaxed mt-0.5">
+                                    Berpengalaman dalam pengembangan sistem dan manajemen proyek IT.
+                                </p>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="relative hover:translate-x-1 transition">
+                                <span class="w-3.5 h-3.5 rounded-full bg-ink absolute -left-[23px] top-1 ring-4 ring-[#F7F6F2] group-hover:scale-125 transition"></span>
+                                <p class="text-sm font-bold text-ink">2009 - 2026</p>
+                                <p class="text-sm font-bold text-slate-900">PCO System Android</p>
+                                <p class="text-xs text-slate-700 leading-relaxed mt-0.5">
+                                    Mengembangkan aplikasi Android dan solusi sistem mobile.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ilustrasi Doodle Monitor Coding </> -->
+                    <div class="absolute right-2 xl:right-4 bottom-2 pointer-events-none group-hover:scale-125 group-hover:-rotate-12 transition duration-300">
+                        <svg class="w-20 h-20 text-ink/75" viewBox="0 0 90 90" fill="none">
+                            <rect x="8" y="12" width="74" height="54" rx="6" stroke="currentColor" stroke-width="2" fill="rgba(30,22,113,0.1)"/>
+                            <rect x="13" y="17" width="64" height="39" rx="3" stroke="currentColor" stroke-width="1.5" fill="#F7F6F2"/>
+                            <!-- Simbol Coding </> -->
+                            <path d="M35 30 L26 36.5 L35 43" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M55 30 L64 36.5 L55 43" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                            <line x1="48" y1="27" x2="42" y2="46" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                            <!-- Kaki Monitor -->
+                            <path d="M36 66 L33 78 L57 78 L54 66" stroke="currentColor" stroke-width="2" fill="rgba(30,22,113,0.18)"/>
+                            <line x1="25" y1="78" x2="65" y2="78" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- 3. CONTACT (2 Kolom - Animasi Card Dominan) -->
+                <div class="xl:col-span-2 p-4 rounded-xl dominant-card bg-[#F7F6F2] border border-stone-200/70 group">
+                    <!-- Header Contact -->
+                    <div class="flex items-center gap-2 mb-5">
+                        <div class="card-icon-badge w-9 h-9 rounded-full bg-ink text-white flex items-center justify-center shadow-sm shrink-0 transition">
+                            <i class="fa-solid fa-phone text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="brush-label">
+                                <h3 class="font-hand text-lg sm:text-xl tracking-wide">Contact</h3>
+                            </div>
+                            <div class="h-0.5 w-16 bg-ink/70 rounded-full ml-3 mt-0.5"></div>
+                        </div>
+                    </div>
+
+                    <!-- Daftar Kontak Interaktif -->
+                    <div class="space-y-4 font-sans text-xs sm:text-[13px] text-slate-800">
+                        <!-- Gmail -->
+                        <a href="mailto:dosen02975@unpam.ac.id" class="flex items-center gap-2.5 group hover:text-ink transition">
+                            <!-- Ikon Warna-warni Gmail -->
+                            <div class="w-7 h-7 rounded bg-white shadow-sm border border-stone-200 flex items-center justify-center shrink-0 group-hover:scale-110 transition">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24">
+                                    <path fill="#EA4335" d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                                </svg>
+                            </div>
+                            <span class="break-all font-medium">dosen02975@unpam.ac.id</span>
+                        </a>
+
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/6285159774347" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 group hover:text-emerald-700 transition">
+                            <div class="w-7 h-7 rounded-full bg-[#25D366] text-white shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 transition">
+                                <i class="fa-brands fa-whatsapp text-base"></i>
+                            </div>
+                            <span class="font-medium">0851-5977-4347</span>
+                        </a>
+
+                        <!-- Lokasi Maps -->
+                        <a href="https://maps.google.com/?q=Rawa+Mekar+Jaya,+BSD+Serpong,+Tangerang+Selatan" target="_blank" rel="noopener noreferrer" class="flex items-start gap-2.5 group hover:text-ink transition">
+                            <div class="w-7 h-7 rounded-full bg-slate-900 text-white shadow-sm flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 transition">
+                                <i class="fa-solid fa-location-dot text-xs"></i>
+                            </div>
+                            <span class="leading-snug font-medium">Rawa Mekar Jaya,<br>Bsd Serpong, Tangsel</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 4. KEAHLIAN (3 Kolom - Animasi Card Dominan) -->
+                <div class="xl:col-span-3 p-4 rounded-xl dominant-card bg-[#F7F6F2] border border-stone-200/70 group" onmouseenter="replaySkillBars()">
+                    <!-- Header Keahlian -->
+                    <div class="flex items-center gap-2.5 mb-5">
+                        <div class="card-icon-badge w-9 h-9 rounded-full bg-ink text-white flex items-center justify-center shadow-sm shrink-0 transition duration-300">
+                            <i class="fa-solid fa-star text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="brush-label">
+                                <h3 class="font-hand text-lg sm:text-xl tracking-wide">Keahlian</h3>
+                            </div>
+                            <div class="h-0.5 w-20 bg-ink/70 rounded-full ml-3 mt-0.5"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Bars (Dengan Animasi Pengisian Saat Load & Hover) -->
+                    <div class="space-y-2.5 font-sans text-xs sm:text-[13px]">
+                        <!-- Skill 1 -->
+                        <div class="grid grid-cols-12 items-center gap-2 hover:translate-x-1 transition">
+                            <div class="col-span-6 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-ink shrink-0"></span>
+                                <span class="font-medium text-slate-900 truncate">Adobe Photoshop</span>
+                            </div>
+                            <div class="col-span-6 h-2.5 bg-stone-200/90 rounded-full overflow-hidden p-0.5 border border-stone-300/60">
+                                <div class="skill-bar-fill h-full" data-width="78%" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 2 -->
+                        <div class="grid grid-cols-12 items-center gap-2 hover:translate-x-1 transition">
+                            <div class="col-span-6 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-ink shrink-0"></span>
+                                <span class="font-medium text-slate-900 truncate">Adobe Illustrator</span>
+                            </div>
+                            <div class="col-span-6 h-2.5 bg-stone-200/90 rounded-full overflow-hidden p-0.5 border border-stone-300/60">
+                                <div class="skill-bar-fill h-full" data-width="76%" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 3 -->
+                        <div class="grid grid-cols-12 items-center gap-2 hover:translate-x-1 transition">
+                            <div class="col-span-6 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-ink shrink-0"></span>
+                                <span class="font-medium text-slate-900 truncate">Adobe Premiere</span>
+                            </div>
+                            <div class="col-span-6 h-2.5 bg-stone-200/90 rounded-full overflow-hidden p-0.5 border border-stone-300/60">
+                                <div class="skill-bar-fill h-full" data-width="65%" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 4 -->
+                        <div class="grid grid-cols-12 items-center gap-2 hover:translate-x-1 transition">
+                            <div class="col-span-6 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-ink shrink-0"></span>
+                                <span class="font-medium text-slate-900 truncate">UI / UX Design</span>
+                            </div>
+                            <div class="col-span-6 h-2.5 bg-stone-200/90 rounded-full overflow-hidden p-0.5 border border-stone-300/60">
+                                <div class="skill-bar-fill h-full" data-width="48%" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 5 -->
+                        <div class="grid grid-cols-12 items-center gap-2 hover:translate-x-1 transition">
+                            <div class="col-span-6 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-ink shrink-0"></span>
+                                <span class="font-medium text-slate-900 truncate">Branding & Layout</span>
+                            </div>
+                            <div class="col-span-6 h-2.5 bg-stone-200/90 rounded-full overflow-hidden p-0.5 border border-stone-300/60">
+                                <div class="skill-bar-fill h-full" data-width="55%" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 6 -->
+                        <div class="grid grid-cols-12 items-center gap-2 hover:translate-x-1 transition">
+                            <div class="col-span-6 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-ink shrink-0"></span>
+                                <span class="font-medium text-slate-900 truncate">Typography</span>
+                            </div>
+                            <div class="col-span-6 h-2.5 bg-stone-200/90 rounded-full overflow-hidden p-0.5 border border-stone-300/60">
+                                <div class="skill-bar-fill h-full" data-width="46%" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==================== FOOTER SCRAPBOOK (NOTES SOBEK & QUOTE) ==================== -->
+        <div class="relative z-20 mt-6 grid grid-cols-1 md:grid-cols-12 items-center gap-6 pt-2 fade-up-3">
+            
+            <!-- Kiri Bawah: Sobekan Kertas "Let's create something amazing together!" -->
+            <div class="md:col-span-3 flex justify-center md:justify-start">
+                <div onclick="celebrateConfetti(event)" class="sticker-note bg-[#EFECE4] px-5 py-3 rounded-lg shadow-md border border-stone-300/70 transform -rotate-6 flex items-center gap-3 relative">
+                    <div class="font-hand text-base sm:text-lg leading-tight text-slate-900 text-center">
+                        <p>Let's create</p>
+                        <p>something</p>
+                        <p>
+                            <span class="relative inline-block px-1.5 font-bold text-ink">
+                                amazing
+                                <!-- Lingkaran Spidol di kata "amazing" dengan animasi menggambar -->
+                                <svg class="absolute inset-0 w-full h-full text-slate-900 -m-0.5" viewBox="0 0 80 30" fill="none">
+                                    <ellipse class="marker-loop" cx="40" cy="15" rx="38" ry="12" stroke="currentColor" stroke-width="1.6" transform="rotate(-4 40 15)"/>
+                                </svg>
+                            </span>
+                            together!
+                        </p>
+                    </div>
+                    <!-- Doodle Smiley Kecil Bergoyang -->
+                    <svg class="w-8 h-8 text-slate-900 shrink-0 wiggle-doodle" viewBox="0 0 40 40" fill="none">
+                        <path d="M10 18 C6 14, 8 8, 14 10 C16 5, 24 5, 26 10 C32 8, 34 14, 30 18 C34 24, 30 32, 20 32 C10 32, 6 24, 10 18 Z" stroke="currentColor" stroke-width="1.8"/>
+                        <circle cx="17" cy="18" r="1.3" fill="currentColor"/>
+                        <circle cx="23" cy="18" r="1.3" fill="currentColor"/>
+                        <path d="M15 22 Q20 27 25 22" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Tengah Bawah: Kutipan / Quote Motivasi -->
+            <div class="md:col-span-6 flex items-center justify-center text-center px-2">
+                <div class="relative inline-flex items-center gap-2 sm:gap-3">
+                    <span class="font-brush text-4xl sm:text-5xl text-ink leading-none self-start -mt-2">“</span>
+                    <p class="font-kalam text-base sm:text-xl font-bold text-slate-900 leading-snug">
+                        Terus belajar, berinovasi, dan berbagi ilmu<br>
+                        untuk memberikan 
+                        <span class="relative inline-block">
+                            manfaat
+                            <!-- Garis Bawah Biru di kata manfaat -->
+                            <svg class="w-full h-2.5 absolute -bottom-1.5 left-0 text-ink" viewBox="0 0 100 10" fill="none">
+                                <path d="M2 4 Q50 1 98 5 M15 8 Q55 6 85 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        yang lebih luas.
+                    </p>
+                    <span class="font-brush text-4xl sm:text-5xl text-ink leading-none self-end -mb-4">”</span>
+                </div>
+            </div>
+
+            <!-- Kanan Bawah: Sobekan Kertas "Thanks for visiting!" + Paperclip Logam -->
+            <div class="md:col-span-3 flex justify-center md:justify-end">
+                <div onclick="celebrateConfetti(event)" class="sticker-note bg-[#EFECE4] px-6 py-3.5 rounded-lg shadow-md border border-stone-300/70 transform rotate-2 flex items-center gap-2.5 relative">
+                    <!-- Penjepit Kertas (Paperclip) di Kanan Atas -->
+                    <svg class="w-8 h-14 text-stone-500 absolute -top-7 right-2 rotate-12 drop-shadow-sm" viewBox="0 0 36 65" fill="none">
+                        <path d="M22 15 L22 46 C22 54, 10 54, 10 46 L10 12 C10 3, 26 3, 26 12 L26 48 C26 60, 6 60, 6 48 L6 18" 
+                              stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+
+                    <div class="font-hand text-base sm:text-lg leading-tight text-slate-900 text-center">
+                        <p>Thanks for</p>
+                        <p>visiting!</p>
+                    </div>
+                    <!-- Hati Doodle Berdetak Lucu -->
+                    <svg class="w-6 h-6 text-slate-900 mt-2 heartbeat-icon" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 20 C12 20, 4 14.5, 4 9 C4 6, 6.5 4, 9 4 C10.8 4, 12 5.2, 12 6.5 C12 5.2, 13.2 4, 15 4 C17.5 4, 20 6, 20 9 C20 14.5, 12 20, 12 20 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" fill="currentColor" fill-opacity="0.15"/>
+                    </svg>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Aksen Sobekan Kertas Biru Tua di Tepi Paling Bawah (Sesuai Gambar) -->
+        <div class="absolute bottom-0 left-0 right-0 h-6 pointer-events-none overflow-hidden flex justify-between">
+            <svg class="w-1/3 h-full text-ink" viewBox="0 0 400 30" preserveAspectRatio="none">
+                <path d="M0 30 L0 5 Q30 12 65 4 T140 8 T220 3 T310 12 L400 30 Z" fill="currentColor"/>
+                <path d="M0 30 L0 12 Q45 18 90 10 T190 15 T290 9 L360 30 Z" fill="#3B2FA3" opacity="0.6"/>
+            </svg>
+            <svg class="w-1/3 h-full text-ink" viewBox="0 0 400 30" preserveAspectRatio="none">
+                <path d="M400 30 L400 4 Q360 14 310 6 T220 10 T130 4 T50 15 L0 30 Z" fill="currentColor"/>
+                <path d="M400 30 L400 12 Q340 18 280 10 T170 16 L60 30 Z" fill="#3B2FA3" opacity="0.6"/>
+            </svg>
+        </div>
+
+    </main>
+
+    <script>
+        // Fungsi Salin Kontak ke Clipboard dengan Toast Notification
+        function copyText(text, message) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast(message);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-msg');
+            toastMsg.textContent = message;
+            toast.classList.remove('translate-x-full', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-x-full', 'opacity-0');
+            }, 2600);
+        }
+
+        // Fitur Ganti Foto Profil (ID Card & Cutout Utama)
+        function triggerPhotoUpload() {
+            document.getElementById('photoInput').click();
+        }
+
+        document.getElementById('photoInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imgUrl = e.target.result;
+                
+                // Update Foto di ID Card
+                const idCardImg = document.getElementById('idCardImg');
+                const idCardSvg = document.getElementById('idCardSvg');
+                idCardImg.src = imgUrl;
+                idCardImg.classList.remove('hidden');
+                idCardSvg.classList.add('hidden');
+
+                // Update Foto Potret Utama
+                const mainPortraitImg = document.getElementById('mainPortraitImg');
+                const mainPortraitSvg = document.getElementById('mainPortraitSvg');
+                mainPortraitImg.src = imgUrl;
+                mainPortraitImg.classList.remove('hidden');
+                mainPortraitSvg.classList.add('hidden');
+
+                showToast('Foto portofolio berhasil diperbarui!');
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // ==================== SCRIPT ANIMASI INTERAKTIF ====================
+
+        // 1. Jalankan Animasi Skill Bars saat halaman dibuka
+        function animateSkillBars() {
+            const bars = document.querySelectorAll('.skill-bar-fill');
+            bars.forEach((bar, index) => {
+                const targetWidth = bar.getAttribute('data-width');
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 250 + index * 110);
+            });
+        }
+
+        // Ulangi animasi bar saat kursor diarahkan ke bagian Keahlian
+        function replaySkillBars() {
+            const bars = document.querySelectorAll('.skill-bar-fill');
+            bars.forEach((bar) => {
+                bar.style.transition = 'none';
+                bar.style.width = '15%';
+                void bar.offsetWidth; // trigger reflow
+                bar.style.transition = 'width 0.9s cubic-bezier(0.22, 1, 0.36, 1)';
+                bar.style.width = bar.getAttribute('data-width');
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(animateSkillBars, 300);
+        });
+
+        // 2. Efek Ledakan Sparkle / Bintang Doodle Lucu saat Klik Stiker / Tombol Cheer
+        function celebrateConfetti(e) {
+            const x = e ? e.clientX : window.innerWidth / 2;
+            const y = e ? e.clientY : window.innerHeight / 3;
+            const symbols = ['✦', '★', '✨', '💡', '🎓', '💙', '🚀'];
+
+            for (let i = 0; i < 14; i++) {
+                const spark = document.createElement('span');
+                spark.className = 'click-sparkle font-hand text-lg select-none';
+                spark.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+                const angle = (Math.PI * 2 * i) / 14 + (Math.random() * 0.5 - 0.25);
+                const distance = 45 + Math.random() * 85;
+                const tx = Math.cos(angle) * distance + 'px';
+                const ty = Math.sin(angle) * distance - 25 + 'px';
+                const rot = (Math.random() * 360 - 180) + 'deg';
+
+                spark.style.left = x + 'px';
+                spark.style.top = y + 'px';
+                spark.style.setProperty('--tx', tx);
+                spark.style.setProperty('--ty', ty);
+                spark.style.setProperty('--rot', rot);
+
+                document.body.appendChild(spark);
+                setTimeout(() => spark.remove(), 850);
+            }
+        }
+
+        // 3. Animasi Menerbangkan Pesawat Kertas Saat Diklik
+        function launchPaperPlane(el) {
+            el.style.transition = 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            el.style.transform = 'translate(235px, -45px) rotate(-25deg) scale(1.25)';
+            showToast('Wusshh! Teruslah bermimpi tinggi! ✈️');
+            setTimeout(() => {
+                el.style.transform = '';
+            }, 900);
+        }
+
+        // 4. Klik Huruf PORTOFOLIO memunculkan efek lompat & bintang kecil
+        document.querySelectorAll('.pop-letter').forEach((letter) => {
+            letter.addEventListener('click', (e) => {
+                celebrateConfetti(e);
+            });
+        });
+
+        // 5. Efek Gerak-Gerak & 3D Tilt Mengikuti Kursor Mouse pada Foto Potret, ID Card & Setiap Card
+        function attachWiggleTilt(element, intensity = 14) {
+            if (!element) return;
+            element.addEventListener('mousemove', (e) => {
+                const rect = element.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -intensity;
+                const rotateY = ((x - centerX) / centerX) * intensity;
+                const moveX = ((x - centerX) / centerX) * 8;
+                const moveY = ((y - centerY) / centerY) * 8;
+
+                element.style.animationPlayState = 'paused';
+                element.style.transform = `perspective(600px) translate(${moveX}px, ${moveY - 8}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateY * 0.35}deg) scale(1.08)`;
+            });
+
+            element.addEventListener('mouseleave', () => {
+                element.style.animationPlayState = '';
+                element.style.transform = '';
+            });
+        }
+
+        // Pasang efek gerak responsif mouse pada ID Card & Potret Utama
+        attachWiggleTilt(document.getElementById('idCardInteractive'), 18);
+        attachWiggleTilt(document.getElementById('portraitInteractive'), 16);
+
+        // Pasang efek 3D tilt halus pada semua dominant-card
+        document.querySelectorAll('.dominant-card').forEach((card) => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -5;
+                const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 5;
+                card.style.transform = `perspective(800px) translateY(-10px) scale(1.03) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
